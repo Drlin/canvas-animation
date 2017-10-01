@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    #canvas {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.5)
+    }
+  </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script src="../js/utils.js"></script>
+    <script>
+      const canvas = document.getElementById('canvas')
+      const ctx = canvas.getContext('2d')
+
+      let W = canvas.width = 800
+      let H = canvas.height = 600
+      let pos = Utils.getOffset(canvas)
+
+      canvas.onclick = () => {
+        console.log(pos)
+        console.log(pos.x, pos.y)
+      }
+    </script>
+</body>
+</html>
