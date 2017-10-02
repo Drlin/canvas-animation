@@ -44,14 +44,20 @@
       drawSystem()
 
       canvas.onmousemove = () => {
+        let dx = mouse.x - W / 2
+        let dy = mouse.y - H / 2
+        // let angle = Math.atan(dx / dy) * 180 / Math.PI
+
+        let angle = Math.atan2(dx,  dy) * 180 / Math.PI
         ctx.clearRect(0, 0, W, H)
         drawSystem()
         ctx.beginPath()
         ctx.lineTo(mouse.x, mouse.y)
         ctx.lineTo(W / 2, H / 2)
         ctx.stroke()
+        ctx.fillText(angle, mouse.x, mouse.y)
       }
-
+      
     </script>
 </body>
 </html>
