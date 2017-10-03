@@ -26,8 +26,5 @@ let Utils = {
   // 弧度转角度
   toAngle() {
     return rad * 180 / Math.PI
-  },
-
-  
+  }, 
 }
-
