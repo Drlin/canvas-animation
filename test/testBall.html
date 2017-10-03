@@ -21,6 +21,7 @@
 <body>
     <canvas id="canvas"></canvas>
     <script src="../js/utils.js"></script>
+    <script src="../js/Ball.js"></script>
     <script>
       const canvas = document.getElementById('canvas')
       const ctx = canvas.getContext('2d')
@@ -29,10 +30,13 @@
       let H = canvas.height = 600
       let pos = Utils.getOffset(canvas)
 
-      canvas.onclick = () => {
-        console.log(pos)
-        console.log(pos.x, pos.y)
-      }
+      const ball = new Ball({
+        x: W / 2,
+        y: H / 2,
+        r: 50,
+      }).render(ctx)
+
+      
     </script>
 </body>
 </html>

@@ -17,5 +17,14 @@ let Utils = {
       y: pageY - top,
     }
   },
-}
 
+  // 角度转弧度
+  toRad() {
+    return angle * Math.PI / 180
+  },
+
+  // 弧度转角度
+  toAngle() {
+    return rad * 180 / Math.PI
+  }, 
+}
