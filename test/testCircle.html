@@ -33,47 +33,57 @@
       const ball = new Ball({
         x: W / 2,
         y: H / 2,
-        r: 50,
+        r: 20,
       }).render(ctx)
 
-      const SWING = 0.6 // 振幅
+      const speed = 0.002 // 振幅
+      const r = 150
       let angle = 0
 
-      //  平滑运动
+      // 圆周运动
       // const move = () => {
       //   window.requestAnimationFrame(move)
       //   ctx.clearRect(0, 0, W, H)
-      //   ball.x =  W / 2 + Math.sin(angle) * SWING
-      //   angle += 0.05
-      //   angle %= Math.PI * 2
-      //   ball.render(ctx)
+      //   ctx.save()
+      //   ctx.translate(W / 2, H / 2)
+      //   ctx.beginPath()
+      //   ctx.arc(0, 0, r, 0, Math.PI * 2)
+      //   ctx.stroke()
+
+        // ball.x = W / 2 + r * Math.cos(angle)
+        // ball.y = H / 2 + r * Math.sin(angle)
+
+        // angle += speed
+        // angle %= Math.PI * 2
+
+        // ball.render(ctx)
+      //   ctx.restore()
       // }
 
-      // 线性运动
-      // let vx = 1
-      // let vy = 0.5
-      // const move = () => {
-      //   window.requestAnimationFrame(move)
-      //   ctx.clearRect(0, 0, W, H)
-      //   ball.x += vx
-      //   ball.y = H / 2 + Math.sin(angle) * SWING
-      //   angle += 0.05
-      //   angle %= Math.PI * 2
-      //   ball.render(ctx)
-      // }
-
-      // 脉冲运动
-      let initScale = 1
+      // 椭圆运动
       const move = () => {
         window.requestAnimationFrame(move)
         ctx.clearRect(0, 0, W, H)
-        ball.scaleX = ball.scaleY = initScale + Math.sin(angle) * SWING
-        angle += 0.05
+        ctx.save()
+        ctx.translate(W / 2, H / 2)
+        ctx.scale(1, 0.4)
+        ctx.beginPath()
+        ctx.arc(0, 0, r, 0, Math.PI * 2)
+        ctx.stroke()
+        ctx.restore()
+
+        ball.x = W / 2 + r * Math.cos(angle)
+        ball.y = H / 2 + r * 0.4 *Math.sin(angle)
+
+        angle += speed
         angle %= Math.PI * 2
+
         ball.render(ctx)
       }
+
+
       move()
-      
+
     </script>
 </body>
 </html>
