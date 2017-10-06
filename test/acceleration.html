@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    #canvas {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.5)
+    }
+  </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script src="../js/utils.js"></script>
+    <script src="../js/Ball.js"></script>
+    <script>
+     
+      const canvas = document.getElementById('canvas')
+      const ctx = canvas.getContext('2d')
+
+      let W = canvas.width = 800
+      let H = canvas.height = 600
+      let pos = Utils.getOffset(canvas)
+
+      const ball = new Ball({
+        x: 0,
+        y:0,
+        r: 20,
+      }).render(ctx)
+
+      let angle = Utils.toRad(30), a = 0.1, vx = 0, vy = 0
+
+      // 小球以30度方向，匀加速运动
+
+      const move = () => {
+        window.requestAnimationFrame(move)
+        ctx.clearRect(0, 0, W, H)
+        let ax = Math.cos(angle) * a
+        let ay = Math.sin(angle) * a
+        ball.x += vx
+        ball.y += vy
+        vx += ax
+        vy += ay
+
+        ball.render(ctx)
+      }
+      move()
+
+      // 重力 加速度
+            
+      
+    </script>
+</body>
+</html>

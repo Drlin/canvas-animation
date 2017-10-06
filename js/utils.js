@@ -19,12 +19,25 @@ let Utils = {
   },
 
   // 角度转弧度
-  toRad() {
+  toRad(angle) {
     return angle * Math.PI / 180
   },
 
   // 弧度转角度
-  toAngle() {
+  toAngle(rad) {
     return rad * 180 / Math.PI
-  }, 
+  },
+
+  //  随机数
+  rp(arr, int) {
+    const max = Math.max(...arr)
+    const min = Math.min(...arr)
+    const num = Math.random() * (max - min) + min
+    return int ? ~~num : num
+  },
+
+  // 随机颜色
+  createColor() {
+    return `rgb(${this.rp([55, 255], true)}, ${this.rp([55, 255], true)}, ${this.rp([55, 255], true)})`
+  },
 }
