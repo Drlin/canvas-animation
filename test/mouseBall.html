@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    #canvas {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.5)
+    }
+  </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script src="../js/Ball.js"></script>
+    <script src="../js/utils.js"></script>
+    <script>
+      const canvas = document.getElementById('canvas')
+      const ctx = canvas.getContext('2d')
+
+      let W = canvas.width = 800
+      let H = canvas.height = 600
+      let mouse = Utils.getOffset(canvas), dx = 0, dy = 0,
+      isMouseMove = false, vx = Utils.rp([-10, 10]), vy = -10,
+      g = 0.2, bounce = -0.7, speedX = 0, speedY = 0
+      const ball = new Ball({
+        x: W / 2,
+        y: H / 2,
+        r: 30,
+      }).render(ctx)
+
+      canvas.addEventListener('mousedown', (e) => {
+        e.preventDefault()
+        if(ball.isPoint(mouse)) {
+          speedX = ball.x
+          speedY = ball.y
+          isMouseMove = true
+          dx = mouse.x - ball.x
+          dy = mouse.y - ball.y
+          canvas.addEventListener('mousemove', moveBallFn)
+          canvas.addEventListener('mouseup', upBallFn)
+        }
+      })
+
+      const bounceMove = () => {
+        vy += g
+        ball.x += vx
+        ball.y += vy
+        if (ball.x + ball.r >= W) {
+          ball.x = W - ball.r
+          //  摩擦力
+          vx *= bounce
+        } else if (ball.x - ball.r <= 0) {
+          ball.x = ball.r
+          vx *= bounce
+        }
+
+        if (ball.y + ball.r >= H) {
+          ball.y = H - ball.r
+          vy *= bounce
+        } else if (ball.y - ball.r <= 0) {
+          ball.y = ball.r
+          vy *= bounce
+        }
+      }
+
+      const setSpeed = () => {
+        vx = speedX - ball.x
+        vy = speedY - ball.y
+        speedX = ball.x
+        speedY = ball.y
+      }
+
+      const moveBallFn = () => {
+        ball.x = mouse.x - dx
+        ball.y = mouse.y - dy
+      }
+
+      const upBallFn = () => {
+        isMouseMove = false
+        canvas.removeEventListener('mousemove', moveBallFn)
+        canvas.removeEventListener('mouseup', upBallFn)
+      }
+
+      const move = () => {
+        window.requestAnimationFrame(move)
+        ctx.clearRect(0, 0, W, H)
+        if (!isMouseMove) {
+          bounceMove()
+        } else {
+          setSpeed()
+        }
+        ball.render(ctx)
+      }
+
+      move()
+    </script>
+</body>
+</html>
