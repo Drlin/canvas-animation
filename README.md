@@ -1,5 +1,5 @@
 # canvas-animation
-## 还没想好写什么，先占了坑
+## 一些效果的展示
 
 ![moveBall gif](https://raw.githubusercontent.com/Drlin/canvas-animation/master/Readme/moveBall.gif)
 ![moveBall gif](https://raw.githubusercontent.com/Drlin/canvas-animation/master/Readme/relatedBall.gif)
